@@ -1,0 +1,151 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+
+const prizes = [
+  "😢 حاول مرة أخرى",
+  "🥳 مبروك! ربحت 5 دولار",
+  "😮 مبروك! ربحت 10 دولار",
+  "🎉 واو! ربحت 50 دولار",
+  "💰 ألف مبروك! ربحت 1000 دولار",
+  "😐 لا حظ اليوم"
+];
+
+export default function YaHazzYaNaseeb() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [paymentDone, setPaymentDone] = useState(false);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [supportMessage, setSupportMessage] = useState("");
+  const [adminView, setAdminView] = useState(false);
+  const [players, setPlayers] = useState([]);
+
+  const handleLogin = () => {
+    if (phone && password) {
+      setLoggedIn(true);
+      setPlayers([...players, phone]);
+    }
+  };
+
+  const handlePayment = () => {
+    setPaymentDone(true);
+  };
+
+  const openBox = () => {
+    setLoading(true);
+    setTimeout(() => {
+      const prize = prizes[Math.floor(Math.random() * prizes.length)];
+      setResult(prize);
+      setLoading(false);
+    }, 1500);
+  };
+
+  if (adminView) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-6">
+        <h1 className="text-2xl font-bold mb-4">📊 لوحة تحكم الإدارة</h1>
+        <p>عدد اللاعبين المسجلين: {players.length}</p>
+        <ul className="mt-4 list-disc pl-5">
+          {players.map((p, i) => (
+            <li key={i}>{p}</li>
+          ))}
+        </ul>
+        <Button onClick={() => setAdminView(false)} className="mt-6 bg-blue-500 text-white">
+          الرجوع للعبة
+        </Button>
+      </div>
+    );
+  }
+
+  if (!loggedIn) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-yellow-100 to-pink-200 p-4">
+        <h1 className="text-3xl font-bold mb-4">🎁 يا حظ، يا نصيب</h1>
+        <Card className="w-full max-w-sm shadow-xl">
+          <CardContent className="p-6 space-y-4">
+            <Input
+              placeholder="رقم الجوال"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="كلمة المرور"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button onClick={handleLogin} className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
+              تسجيل الدخول
+            </Button>
+            <Button variant="ghost" onClick={() => setAdminView(true)} className="text-xs text-gray-500">
+              دخول الإدارة
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!paymentDone) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-pink-100 p-6">
+        <h2 className="text-2xl font-bold mb-4">✅ سجّلت الدخول</h2>
+        <p className="mb-6">الرجاء دفع 5 USDT عبر Binance Pay لتجربة حظك.</p>
+        <Button
+          onClick={handlePayment}
+          className="bg-green-500 hover:bg-green-600 text-white"
+        >
+          دفع الآن (محاكاة)
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-yellow-100 to-pink-200 p-6">
+      <h1 className="text-4xl font-extrabold mb-6">🎲 افتح الصندوق!</h1>
+
+      <motion.div
+        className="bg-white rounded-2xl shadow-2xl p-8 text-center w-full max-w-sm"
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Button
+          disabled={loading}
+          onClick={openBox}
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white mb-4"
+        >
+          {loading ? "جاري الفتح..." : "افتح الصندوق 🎁"}
+        </Button>
+        {result && (
+          <motion.div
+            className="text-xl font-bold text-center mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            {result}
+          </motion.div>
+        )}
+      </motion.div>
+
+      <div className="mt-8 text-sm text-gray-600 w-full max-w-sm">
+        <h2 className="text-md font-bold mb-2">📩 خدمة العملاء</h2>
+        <Input
+          placeholder="اكتب مشكلتك أو استفسارك"
+          value={supportMessage}
+          onChange={(e) => setSupportMessage(e.target.value)}
+        />
+        <Button className="mt-2 bg-blue-500 text-white w-full" onClick={() => alert("تم إرسال الرسالة! سنرد عليك قريبًا.")}>إرسال</Button>
+      </div>
+
+      <div className="mt-8 text-sm text-gray-500">
+        * هذه اللعبة للترفيه فقط - لا توجد جوائز فعلية حاليًا
+      </div>
+    </div>
+  );
+}
