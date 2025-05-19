@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - لعبة فتح الصندوق</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #1e1e2f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #login, #game {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  #login.active, #game.active {
+    display: flex;
+  }
+  input {
+    padding: 10px;
+    width: 220px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    background: #27ae60;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  #box {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #d9534f, #c9302c);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(201, 48, 44, 0.7);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  #message {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #f39c12;
+    min-height: 30px;
+  }
+</style>
+</head>
+<body>
+
+<div id="login" class="active">
+  <h2>تسجيل الدخول</h2>
+  <input type="text" id="username" placeholder="رقم الجوال أو اسم المستخدم">
+  <input type="password" id="password" placeholder="كلمة المرور">
+  <button onclick="login()">دخول</button>
+</div>
+
+<div id="game">
+  <div id="box">افتح الصندوق</div>
+  <div id="message"></div>
+</div>
+
+<script>
+  function login() {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    if (user && pass) {
+      document.getElementById('login').classList.remove('active');
+      document.getElementById('game').classList.add('active');
+    } else {
+      alert('يرجى إدخال اسم المستخدم وكلمة المرور');
+    }
+  }
+
+  const box = document.getElementById('box');
+  const message = document.getElementById('message');
+
+  box.addEventListener('click', function() {
+    message.textContent = 'خسرت! حاول مرة أخرى.';
+    box.style.background = 'linear-gradient(135deg, #7f8c8d, #95a5a6)';
+    box.style.cursor = 'default';
+  });
+</script>
+
+</body>
+</html>
