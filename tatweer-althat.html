@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أسرار الذات</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .marquee {
+      background: #111;
+      color: #0f0;
+      padding: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .secret {
+      background: #222;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .secret.locked::after {
+      content: '... (الرجاء الاشتراك لقراءة المزيد)';
+      color: #f99;
+    }
+    .payment-box {
+      background: #333;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    input[type=file], input[type=button] {
+      margin: 10px 0;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee"><span>محمد يقول: أشكركم على المعلومات - سعاد تقول: والله موقع يفتح النفس - ناصر: أخيرًا فهمت ذاتي 💡</span></div>
+  <header>أسرار الذات التي لن يخبرك عنها أحد ✨</header>
+
+  <div class="container">
+    <h1>7 أسرار مذهلة:</h1>
+    <div class="secret locked">1. السر الأول: كيف تفهم نفسك حقًا</div>
+    <div class="secret locked">2. السر الثاني: لماذا تفشل رغم اجتهادك؟</div>
+    <div class="secret locked">3. السر الثالث: أسرار الطاقة الداخلية</div>
+    <div class="secret locked">4. السر الرابع: التحكم بالعواطف</div>
+    <div class="secret locked">5. السر الخامس: برمجة العقل الباطن</div>
+    <div class="secret locked">6. السر السادس: مواجهة المخاوف الخفية</div>
+    <div class="secret locked">7. السر السابع: الوصول للسلام الداخلي</div>
+
+    <div class="payment-box">
+      <h2>لإكمال القراءة، اشترك بـ10 دولار</h2>
+      <p>أرسل المبلغ إلى عنوان TRC20:</p>
+      <p style="background:#000;padding:10px;border-radius:5px;user-select:all">TZEWbLHnYr4seFeFZ5ovNjXEfmzYNj4QCy</p>
+      <p>ثم ارفع صورة الإيصال هنا:</p>
+      <form action="https://formspree.io/f/mwkgyqgy" method="POST" enctype="multipart/form-data">
+        <input type="file" name="receipt" accept="image/*" required><br>
+        <input type="hidden" name="email" value="bolkhair333@gmail.com">
+        <input type="submit" value="أرسل الإيصال">
+      </form>
+      <p>سيتم مراجعة الإيصال يدويًا خلال دقائق.</p>
+    </div>
+  </div>
+</body>
+</html>
+  
